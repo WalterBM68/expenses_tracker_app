@@ -1,0 +1,34 @@
+<div class="container">
+    <div class="main-container">
+        <h2>Count the Expenses</h2>
+        <form action="/expenses" method="post">
+
+            <div class="middle-container">
+                <label for="description" class="descript">Description: </label>
+                <select name="description" class="description">
+                    <option value="travel">Travel</option>
+                    <option value="food">Food</option>
+                    <option value="toiletries">Toiletries</option>
+                    <option value="communication">Communication</option>
+                </select>
+            </div>
+
+            <div class="middle-container">
+                <p for="firstname" class="name-label">Date: </p>
+                <input type="text" class="name" placeholder="Enter date" name="date" required>
+            </div>
+
+            <div class="middle-container">
+                <p for="firstname" class="name-label">Amount: </p>
+                <input type="text" class="name" placeholder="Enter amount" name="amount" required>
+            </div>
+            <div class="btns">
+                <button class="submitBtn" type="submit"> Submit </button>
+        </form>
+                <button class="expenseBtn" type="submit"> Count </button>
+            </div>
+        <div class="theExpenses">
+            <a href="/">Show the Home Page</a>
+        </div>
+    </div>
+</div>

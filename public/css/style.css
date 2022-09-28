@@ -3,12 +3,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
     overflow: hidden;
-    padding: 160px 0;
+    padding: 60px 0;
     background-color: #ffffff;
 }
-.main-wrapper{
+.main-container{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -29,6 +28,30 @@ button.register{
     width: 100%;
     /* margin-left: 150px; */
 } 
+.submitBtn, .expenseBtn{
+    background-color: #40b78c;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    border-radius: 10px;
+    /* width: 100%; */
+}
+.theExpenses{
+    text-align: center;
+    margin-top: 2%;
+    font-size: 18px;
+}
+a{
+    text-decoration: none;
+    cursor: pointer;
+    color: white;
+}
+a:hover{
+    color: red;
+}
 .middle-container{
     display: flex;
     align-items: center;
@@ -37,6 +60,12 @@ button.register{
 .name-label{
     color: gray;
     font-weight: bold;
+    font-size: 20px;
+}
+.descript{
+    color: gray;
+    font-weight: bold;
+    font-size: 20px;
 }
 input.name{
     border-bottom: 0.1px solid black;
@@ -45,6 +74,15 @@ input.name{
     margin-left: 10px;
     outline: 0.2px solid rgb(0, 0, 0);
     width: 180px;
+}
+.description{
+    border-bottom: 0.1px solid black;
+    padding: 5px 10px;
+    margin: 15px 0;
+    margin-left: 15px;
+    outline: 0.2px solid rgb(0, 0, 0);
+    width: 203px;
+    font-size: 16px;
 }
 button:hover{
     opacity: 0.8;

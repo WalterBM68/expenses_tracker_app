@@ -7,7 +7,7 @@ const pgp = pgPromise();
 const ExpensesDatabase = require('./database');
 const Routes = require('./route');
 
-const DATABASE_URL = process.env.DATABASE_URL || 'postgresql://postgres:pg123@localhost:5432/expenses_tracker;';
+const DATABASE_URL = process.env.DATABASE_URL || 'postgresql://postgres:pg123@localhost:5432/expenses_tracker';
 const config = {
   connectionString: DATABASE_URL
 }
@@ -29,6 +29,9 @@ const expensesDatabase = ExpensesDatabase(db);
 const routes = Routes(expensesDatabase);
 
 app.get('/', routes.homeRoute);
+app.post('/users', routes.storeAllNames);
+app.get('/expenses', routes.getExpenses);
+app.post('/expenses', routes.countUsersExpenses)
 
 const PORT = process.env.PORT || 2000
 app.listen(PORT, function(){

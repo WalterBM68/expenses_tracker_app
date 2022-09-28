@@ -1,11 +1,11 @@
 
 <div class="container">
-    <div class="main-wrapper">
+    <div class="main-container">
         <h2>Expenses App</h2>
         <form action="/users" method="post">
             <div class="middle-container">
                 <p for="firstname" class="name-label">Firstname: </p>
-                <input type="text" class="name" placeholder="Enter Firstname" name="firstname" required>
+                <input type="text" class="name" placeholder="Enter Firstname" name="name" required>
             </div>
             <div class="middle-container">
                 <p for="firstname" class="name-label">Lastname: </p>
@@ -17,17 +17,8 @@
             </div>
             <button class="register" type="submit"> Register </button>
         </form>
+        <div class="theExpenses">
+            <a href="/expenses">Show the Expenses</a>
+        </div>
     </div>
-    <h2>Category</h2>
-    <form action="/category" method="post">
-        <label for="description">Description: </label>
-        <select name="description">
-            <option value="food">Food</option>
-            <option value="travel">Travel</option>
-            <option value="toiletries">Toiletries</option>
-            <option value="communication">Communication</option>
-        </select>
-      <input type="submit" value="Submit" />
-      {{!-- <button class="descript" type="submit"> Submit </button> --}}
-    </form>
 </div>

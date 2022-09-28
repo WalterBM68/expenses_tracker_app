@@ -12,6 +12,7 @@ CREATE TABLE category(
 CREATE TABLE expenses(
     id serial not null primary key,
     date int not null,
+    amount varchar(50) not null;
     user_id int,
     category_id int,
     foreign key(user_id) references users(id),
