@@ -6,13 +6,13 @@ module.exports = function expensesDatabase(db){
             await db.manyOrNone('insert into users (firstname, lastname, email) values ($1, $2, $3);', [firstname, lastname, email]);
         }
     }
-    const storeUsersExpenses = async (date, amount) => {
+    const storeUsersExpenses = async (amount, date) => {
         const dateOfExpense = await db.oneOrNone('select date from expenses where date = $1;', [date]);
         let slice = date.slice(0, 2);
         const theUser = await db.oneOrNone('select id from users where firstname = $1;', [slice]);
         const theCategory = await db.manyOrNone('select id from category where description = $1;', [slice]);
         if(dateOfExpense === null && theUser !== null && theCategory !== null){
-            await db.manyOrNone('insert into expenses (date, amount) values ($1, $2);', [date, amount, slice.id, slice.id]);
+            await db.manyOrNone('insert into expenses (amount, user_id, category_id, date) values ($1, $2, $3, $4);', [amount, theUser.id, theCategory.id, date]);
         }
     }
     const getStoredUsers = async () =>{
@@ -20,7 +20,7 @@ module.exports = function expensesDatabase(db){
         return users;
     }
     const getUsersExpenses = async () =>{
-        const userExpense = await db.manyOrNone('select users.firstname, category.description from users INNER JOIN expenses ON user_id = users.id INNER JOIN category ON category.id = category_id;');
+        const userExpense = await db.manyOrNone('select users.firstname, category.description from users INNER JOIN expenses ON expenses.user_id = users.id INNER JOIN category ON category.id = expenses.category_id;');
         return userExpense;
     }
     const deleteUsersDetails = async () =>{

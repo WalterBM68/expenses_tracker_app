@@ -19,7 +19,7 @@ module.exports = Routes = (expenseDB) => {
     const countUsersExpenses = async (req, res) => {
         const date = req.body.date;
         const amount = req.body.amount;
-        await expenseDB.storeUsersExpenses(date, amount);
+        await expenseDB.storeUsersExpenses(amount, date);
         res.redirect('/expenses');
     }
     const deleteUsers = async (req, res) => {
