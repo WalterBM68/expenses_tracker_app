@@ -37,7 +37,7 @@ app.use(
 app.use(flash());
 
 app.use(function(req, res, next){
-	if(req.path === '/login' || req.path === '/register'){
+	if(req.path === '/' || req.path === '/login'){
 		next();
 	}else{
 		if(!req.session.userUniqueCode){

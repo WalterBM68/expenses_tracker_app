@@ -84,10 +84,10 @@ module.exports = Routes = (expenseDB) => {
     const showUserExpenses = async (req, res) => {
         const theExpenses = await expenseDB.getUsersExpenses(req.session.userUniqueCode.id);
         const amount = await expenseDB.countAllTheExpenses();
-        console.log('the amount ' + amount);
+        console.log('the amount ' + amount.amount);
         res.render('view_expenses',{
             theExpenses,
-            // amount
+            amount
         });
     }
     // log out

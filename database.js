@@ -35,8 +35,8 @@ module.exports = function expensesDatabase(db){
         return userExpense;
     }
     const countAllTheExpenses = async () => {
-        const answer = await db.manyOrNone('select count(id) from expenses;');
-        // console.log('the answer ' + answer);
+        const answer = await db.manyOrNone('select SUM(amount) from expenses;');
+        console.log('the answer ' + answer)
         return answer;
     }
     const deleteUsersDetails = async () =>{
