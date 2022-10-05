@@ -38,7 +38,7 @@ app.use(flash());
 
 app.use(function(req, res, next){
 	if(req.path === '/' || req.path === '/login'){
-		next();
+		next()
 	}else{
 		if(!req.session.userUniqueCode){
             res.redirect('/login');
