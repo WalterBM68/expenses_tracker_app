@@ -3,7 +3,8 @@ CREATE TABLE users(
     id serial not null primary key,
     firstname text not null,
     lastname text not null,
-    email varchar(80) not null
+    email varchar(80) not null,
+    code text not null
 );
 CREATE TABLE category(
     id serial not null primary key,

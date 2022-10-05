@@ -90,9 +90,8 @@ module.exports = Routes = (expenseDB) => {
             res.redirect('/login');
             return;
         }
-        let usersID = req.session.userUniqueCode.id;
-        const theExpenses = await expenseDB.getUsersExpenses(usersID);
-        const amount = await expenseDB.countAllTheExpenses(usersID);
+        const theExpenses = await expenseDB.getUsersExpenses(req.session.userUniqueCode.id);
+        const amount = await expenseDB.countAllTheExpenses(req.session.userUniqueCode.id);
         res.render('view_expenses',{
             theExpenses,
             amount
