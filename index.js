@@ -35,10 +35,10 @@ app.use(
 	})
 );
 app.use(flash());
-
+/*
 app.use(function(req, res, next){
-	if(req.path === '/' || req.path === '/login'){
-		next()
+	if(req.path === '/login' ||  req.path === '/'){
+		next();
 	}else{
 		if(!req.session.userUniqueCode){
             res.redirect('/login');
@@ -47,13 +47,13 @@ app.use(function(req, res, next){
 		next();
 	}
 });
-
+*/
 const expensesDatabase = ExpensesDatabase(db);
 const routes = Routes(expensesDatabase);
 
 // for registering the user
 app.get('/', routes.homeRoute);
-app.post('/users', routes.registerNewUsers);
+app.post('/the_users', routes.registerNewUsers);
 // for login
 app.get('/login', routes.getLoginInterface);
 app.post('/login', routes.loginTheUser);

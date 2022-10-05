@@ -9,22 +9,23 @@
         </tr>
         {{#each theExpenses}}
         <tr>
-            <td>{{firstname}}</td>
-            <td>{{amount}}</td>
+            <td>{{firstname}}  {{lastname}}</td>
+            <td>R{{amount}}</td>
             <td>{{expense_date}}</td>
             <td>{{description}}</td>
         </tr>
         {{/each}}
     </table>
     <div class="paragraph">
-        <p for="firstname" class="details">Total expense: </p>
-        <p for="code" class="uniqueCode">{{amount}}</p>
+        <p for="total_expense" class="details">Total expense: </p>
+        <p for="code" class="userTotalAmount">R{{amount}}</p>
     </div>
     <div class="paragraph">
-        <p for="firstname" class="details">Choose expenses by date: </p>
-        <input type="date" class="chooseExpense" placeholder="Enter Firstname" name="name">
+        <p for="choose_expense" class="details">Choose expenses by date: </p>
+        <input type="date" class="chooseExpense" placeholder="Enter Firstname" name="view">
     </div>
     <div class="btns">
         <button class="submitBtn" type="submit"> show expenses </button>
+        <a href="/logout" style="font-size: 20px; color:black">Logout</a>
     </div>
 </div>

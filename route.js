@@ -24,7 +24,7 @@ module.exports = Routes = (expenseDB) => {
     // register the user and generate the unique code
     const registerNewUsers = async (req, res) => {
         let {name, lastname, email} = req.body;
-        if(name && lastname){
+        if(name && lastname && email){
             name = name.toLowerCase();
             lastname = lastname.toLowerCase();
             let code = uid();
@@ -62,6 +62,10 @@ module.exports = Routes = (expenseDB) => {
     }
     // show the expenses interface
     const getExpenses = async (req, res) => {
+        if(!req.session.userUniqueCode){
+            res.redirect('/login');
+            return;
+        }
         const categories = await expenseDB.getCategory();
         res.render('expenses',{
             userUniqueCode: req.session.userUniqueCode,
@@ -82,8 +86,13 @@ module.exports = Routes = (expenseDB) => {
     }
     // show the user his/her expenses
     const showUserExpenses = async (req, res) => {
-        const theExpenses = await expenseDB.getUsersExpenses(req.session.userUniqueCode.id);
-        const amount = await expenseDB.countAllTheExpenses();
+        if(!req.session.userUniqueCode){
+            res.redirect('/login');
+            return;
+        }
+        let usersID = req.session.userUniqueCode.id;
+        const theExpenses = await expenseDB.getUsersExpenses(usersID);
+        const amount = await expenseDB.countAllTheExpenses(usersID);
         res.render('view_expenses',{
             theExpenses,
             amount

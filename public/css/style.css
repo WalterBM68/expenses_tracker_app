@@ -120,8 +120,13 @@ table{
     margin-right: 65%;
     border-bottom: 0.1px solid black;
     padding: 4px 8px;
-    /* margin: 15px 0; */
     outline: 0.2px solid rgb(0, 0, 0);
     width: 203px;
     font-size: 16px;
+}
+.userTotalAmount{
+    margin-right: 88%;
+    color: blue;
+    font-weight: bold;
+    font-size: 20px;
 }
