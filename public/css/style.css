@@ -7,7 +7,7 @@
     padding: 60px 0;
     background-color: #ffffff;
 }
-.main-container{
+.main_paragraph{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -52,12 +52,12 @@ a{
 a:hover{
     color: red;
 }
-.middle-container{
+.paragraph{
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.name-label{
+.details{
     color: gray;
     font-weight: bold;
     font-size: 20px;
@@ -75,6 +75,12 @@ input.name{
     outline: 0.2px solid rgb(0, 0, 0);
     width: 180px;
 }
+.uniqueCode{
+    color: gray;
+    font-weight: bold;
+    margin-right: 158px;
+    font-size: 20px;
+}
 .description{
     border-bottom: 0.1px solid black;
     padding: 5px 10px;
@@ -90,4 +96,32 @@ button:hover{
 h2{
     text-align: center;
     color: white;
+}
+.success{
+    font-size: 18px;
+    color: green;
+}
+.error{
+    font-size: 18px;
+    color: red;
+}
+td, th{
+    border: 1px solid;
+    align-items: flex-end;
+    height: 50%;
+}
+table{
+    width: 35%;
+    border-collapse: collapse;
+    font-size: 20px;
+    margin: 5px 5px 12px 5px;
+}
+.chooseExpense{
+    margin-right: 65%;
+    border-bottom: 0.1px solid black;
+    padding: 4px 8px;
+    /* margin: 15px 0; */
+    outline: 0.2px solid rgb(0, 0, 0);
+    width: 203px;
+    font-size: 16px;
 }

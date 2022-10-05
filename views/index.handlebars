@@ -1,24 +1,30 @@
 
 <div class="container">
-    <div class="main-container">
-        <h2>Expenses App</h2>
+    <div class="main_paragraph">
+        <h2>Register the users</h2>
         <form action="/users" method="post">
-            <div class="middle-container">
-                <p for="firstname" class="name-label">Firstname: </p>
-                <input type="text" class="name" placeholder="Enter Firstname" name="name" required>
+            <div class="success" id="success">
+                <h4> {{messages.success}} </h4>
+            </div>   
+            <div class="error" id="error">
+                <h4> {{messages.error}} </h4>
+            </div>        
+            <div class="paragraph">
+                <p for="firstname" class="details">Firstname: </p>
+                <input type="text" class="name" placeholder="Enter Firstname" name="name">
             </div>
-            <div class="middle-container">
-                <p for="firstname" class="name-label">Lastname: </p>
-                <input type="text" class="name" placeholder="Enter Lastname" name="lastname" required>
+            <div class="paragraph">
+                <p for="lastname" class="details">Lastname: </p>
+                <input type="text" class="name" placeholder="Enter Lastname" name="lastname">
             </div>
-            <div class="middle-container">
-                <p for="email" class="name-label">Email: </p>
-                <input type="text" class="name" placeholder="Enter Email" name="email" required>
+            <div class="paragraph">
+                <p for="email" class="details">Email: </p>
+                <input type="text" class="name" placeholder="Enter Email" name="email">
             </div>
             <button class="register" type="submit"> Register </button>
         </form>
         <div class="theExpenses">
-            <a href="/expenses">Show the Expenses</a>
+            <a href="/login">Show the Login page</a>
         </div>
     </div>
 </div>

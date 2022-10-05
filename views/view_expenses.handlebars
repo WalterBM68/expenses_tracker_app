@@ -1,0 +1,30 @@
+<h2>The Expenses are as Follows</h2>
+<div>
+    <table>
+        <tr>
+            <th>User</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>category</th>
+        </tr>
+        {{#each theExpenses}}
+        <tr>
+            <td>{{firstname}}</td>
+            <td>{{amount}}</td>
+            <td>{{expense_date}}</td>
+            <td>{{description}}</td>
+        </tr>
+        {{/each}}
+    </table>
+    <div class="paragraph">
+        <p for="firstname" class="details">Total expense: </p>
+        <p for="code" class="uniqueCode">{{amount}}</p>
+    </div>
+    <div class="paragraph">
+        <p for="firstname" class="details">Choose expenses by date: </p>
+        <input type="date" class="chooseExpense" placeholder="Enter Firstname" name="name">
+    </div>
+    <div class="btns">
+        <button class="submitBtn" type="submit"> show expenses </button>
+    </div>
+</div>

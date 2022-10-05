@@ -4,6 +4,8 @@ const hbhs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const pgPromise = require('pg-promise');
 const pgp = pgPromise();
+const flash = require('express-flash');
+const session = require('express-session');
 const ExpensesDatabase = require('./database');
 const Routes = require('./route');
 
@@ -25,13 +27,41 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+app.use(
+	session({
+	  secret: 'secret',
+	  resave: true,
+	  saveUninitialized: true
+	})
+);
+app.use(flash());
+
+app.use(function(req, res, next){
+	if(req.path === '/login' || req.path === '/register'){
+		next();
+	}else{
+		if(!req.session.userUniqueCode){
+            res.redirect('/login');
+            return;
+        }
+		next();
+	}
+});
+
 const expensesDatabase = ExpensesDatabase(db);
 const routes = Routes(expensesDatabase);
 
+// for registering the user
 app.get('/', routes.homeRoute);
-app.post('/users', routes.storeAllNames);
+app.post('/users', routes.registerNewUsers);
+// for login
+app.get('/login', routes.getLoginInterface);
+app.post('/login', routes.loginTheUser);
+// for expenses
 app.get('/expenses', routes.getExpenses);
-app.post('/expenses', routes.countUsersExpenses)
+app.post('/expenses', routes.countUsersExpenses);
+app.get('/view_expenses', routes.showUserExpenses);
+app.get('/logout', routes.logingout);
 
 const PORT = process.env.PORT || 2000
 app.listen(PORT, function(){

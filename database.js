@@ -1,27 +1,43 @@
 
 module.exports = function expensesDatabase(db){
-    const storeUsersInfo = async (firstname, lastname, email) =>{
+    const storeUsersInfo = async (firstname, lastname, email, code) =>{
         const user = await db.oneOrNone('select * from users where firstname = $1;', [firstname]);
         if(user === null){
-            await db.manyOrNone('insert into users (firstname, lastname, email) values ($1, $2, $3);', [firstname, lastname, email]);
+            await db.none('insert into users (firstname, lastname, email, code) values ($1, $2, $3, $4);', [firstname, lastname, email, code]);
         }
     }
-    const storeUsersExpenses = async (amount, date) => {
-        const dateOfExpense = await db.oneOrNone('select date from expenses where date = $1;', [date]);
-        let slice = date.slice(0, 2);
-        const theUser = await db.oneOrNone('select id from users where firstname = $1;', [slice]);
-        const theCategory = await db.manyOrNone('select id from category where description = $1;', [slice]);
-        if(dateOfExpense === null && theUser !== null && theCategory !== null){
-            await db.manyOrNone('insert into expenses (amount, user_id, category_id, date) values ($1, $2, $3, $4);', [amount, theUser.id, theCategory.id, date]);
+    const getStoredUsers = async (firstname) =>{
+        const user = await db.oneOrNone('select count(*) from users where firstname = $1;', [firstname]);
+        return user;
+    }
+    const getUniqueCodeOfTheUser = async (code) => {
+        const uniqueCode = await db.oneOrNone('select * from users where code = $1;', [code]);
+        return uniqueCode;
+    }
+    const storeUsersExpenses = async (amount, date, user, category) => {
+        const dateOfExpense = await db.oneOrNone('select expense_date from expenses where expense_date = $1;', [date]);
+        if(dateOfExpense === null){
+            await db.none('insert into expenses (amount, expense_date, user_id, category_id) values ($1, $2, $3, $4);', [amount, date, user, category]);
         }
     }
-    const getStoredUsers = async () =>{
-        const users = await db.manyOrNone('select * from users;');
-        return users;
+    
+    const getCategory = async () =>{
+        const description = await db.manyOrNone('select * from category order by description asc;');
+        return description;
     }
-    const getUsersExpenses = async () =>{
-        const userExpense = await db.manyOrNone('select users.firstname, category.description from users INNER JOIN expenses ON expenses.user_id = users.id INNER JOIN category ON category.id = expenses.category_id;');
+    const getUsersExpenses = async (userID) =>{
+        const userExpense = await db.manyOrNone(`select *, TO_CHAR(expense_date, 'Day') as day from expenses 
+            join category
+                on expenses.category_id = category.id 
+            join users 
+                on users.id = expenses.user_id
+            where users.id = $1;`, [userID]);
         return userExpense;
+    }
+    const countAllTheExpenses = async () => {
+        const answer = await db.manyOrNone('select count(id) from expenses;');
+        // console.log('the answer ' + answer);
+        return answer;
     }
     const deleteUsersDetails = async () =>{
         await db.none('delete from users;');
@@ -33,7 +49,10 @@ module.exports = function expensesDatabase(db){
         storeUsersInfo,
         storeUsersExpenses,
         getStoredUsers,
+        getUniqueCodeOfTheUser,
+        getCategory,
         getUsersExpenses,
+        countAllTheExpenses,
         deleteUsersDetails,
         deleteExpenses
     }

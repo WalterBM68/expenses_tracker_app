@@ -11,7 +11,7 @@ CREATE TABLE category(
 );
 CREATE TABLE expenses(
     id serial not null primary key,
-    Date date not null,
+    expense_date date not null,
     amount varchar(50) not null,
     user_id int,
     category_id int,

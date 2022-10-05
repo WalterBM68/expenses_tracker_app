@@ -1,34 +1,46 @@
 <div class="container">
-    <div class="main-container">
-        <h2>Count the Expenses</h2>
+    <div class="main_paragraph">
+        <h2>Expenses</h2>
         <form action="/expenses" method="post">
+            <div class="success" id="success">
+                <h4> {{messages.success}} </h4>
+            </div>   
+            <div class="error" id="error">
+                <h4> {{messages.error}} </h4>
+            </div> 
+            
+            <div class="paragraph">
+                <p for="firstname" class="details">Firstname: </p>
+                <p for="code" class="uniqueCode">{{userUniqueCode.firstname}} </p>  
+            </div>
 
-            <div class="middle-container">
+            <div class="paragraph">
                 <label for="description" class="descript">Description: </label>
                 <select name="description" class="description">
-                    <option value="travel">Travel</option>
-                    <option value="food">Food</option>
-                    <option value="toiletries">Toiletries</option>
-                    <option value="communication">Communication</option>
+                    <option value="">select the category</option>
+                    {{#each categories}}
+                        <option value="{{id}}">{{description}}</option>
+                    {{/each}}
                 </select>
             </div>
-
-            <div class="middle-container">
-                <p for="firstname" class="name-label">Date: </p>
-                <input type="text" class="name" placeholder="Enter date" name="date" required>
+            
+            <div class="paragraph">
+                <p for="date" class="details">Date: </p>
+                <input type="date" class="name" name="date">
             </div>
 
-            <div class="middle-container">
-                <p for="firstname" class="name-label">Amount: </p>
-                <input type="text" class="name" placeholder="Enter amount" name="amount" required>
+            <div class="paragraph">
+                <p for="amount" class="details">Amount: </p>
+                <input type="text" class="name" placeholder="Enter amount" name="amount">
             </div>
             <div class="btns">
                 <button class="submitBtn" type="submit"> Submit </button>
         </form>
-                <button class="expenseBtn" type="submit"> view expense </button>
+                <a href="/view_expenses" style="font-size: 20px; margin: 0px 50px;">view expense </a>
+                <a href="/logout" style="font-size: 20px;">Logout</a>
             </div>
         <div class="theExpenses">
-            <a href="/">Show the Home Page</a>
+            <a href="/login">Show the login page</a>
         </div>
     </div>
 </div>
