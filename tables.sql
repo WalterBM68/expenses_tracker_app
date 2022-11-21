@@ -19,3 +19,8 @@ CREATE TABLE expenses(
     foreign key(user_id) references users(id),
     foreign key(category_id) references category(id)
 ); 
+
+-- INSERT INTO category VALUES(1, 'travel');
+-- INSERT INTO category VALUES(2, 'food');
+-- INSERT INTO category VALUES(3, 'toiletries');
+-- INSERT INTO category VALUES(4, 'communication');

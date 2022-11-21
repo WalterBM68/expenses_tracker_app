@@ -14,6 +14,18 @@ app.use(
 );
 app.use(flash());
 
+app.use(function(req, res, next){
+	if(req.path === '/login' ||  req.path === '/'){
+		next();
+	}else{
+		if(!req.session.userUniqueCode){
+            res.redirect('/login');
+            return;
+        }
+		next();
+	}
+});
+
 module.exports = Routes = (expenseDB) => {
     let globalCode = '';
     // get the register interface
@@ -62,10 +74,10 @@ module.exports = Routes = (expenseDB) => {
     }
     // show the expenses interface
     const getExpenses = async (req, res) => {
-        if(!req.session.userUniqueCode){
-            res.redirect('/login');
-            return;
-        }
+        // if(!req.session.userUniqueCode){
+        //     res.redirect('/login');
+        //     return;
+        // }
         const categories = await expenseDB.getCategory();
         res.render('expenses',{
             userUniqueCode: req.session.userUniqueCode,
@@ -86,10 +98,10 @@ module.exports = Routes = (expenseDB) => {
     }
     // show the user his/her expenses
     const showUserExpenses = async (req, res) => {
-        if(!req.session.userUniqueCode){
-            res.redirect('/login');
-            return;
-        }
+        // if(!req.session.userUniqueCode){
+        //     res.redirect('/login');
+        //     return;
+        // }
         const theExpenses = await expenseDB.getUsersExpenses(req.session.userUniqueCode.id);
         const amount = await expenseDB.countAllTheExpenses(req.session.userUniqueCode.id);
         res.render('view_expenses',{

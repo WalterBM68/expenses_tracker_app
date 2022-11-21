@@ -35,19 +35,7 @@ app.use(
 	})
 );
 app.use(flash());
-/*
-app.use(function(req, res, next){
-	if(req.path === '/login' ||  req.path === '/'){
-		next();
-	}else{
-		if(!req.session.userUniqueCode){
-            res.redirect('/login');
-            return;
-        }
-		next();
-	}
-});
-*/
+
 const expensesDatabase = ExpensesDatabase(db);
 const routes = Routes(expensesDatabase);
 

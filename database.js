@@ -20,7 +20,6 @@ module.exports = function expensesDatabase(db){
             await db.none('insert into expenses (amount, expense_date, user_id, category_id) values ($1, $2, $3, $4);', [amount, date, user, category]);
         }
     }
-    
     const getCategory = async () =>{
         const description = await db.manyOrNone('select * from category order by description asc;');
         return description;
